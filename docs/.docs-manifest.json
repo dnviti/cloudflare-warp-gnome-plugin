@@ -1,0 +1,166 @@
+{
+  "version": "1.0",
+  "generated_at": "2026-03-24T23:49:44.771998Z",
+  "visual_richness": "tiny",
+  "sections": [
+    {
+      "name": "index",
+      "file": "index.md",
+      "source_files": [
+        {
+          "path": "metadata.json",
+          "hash": "ec5efae9590216a9896bc12a956b3b57fedab07650452117d93a8614f251ccf9"
+        },
+        {
+          "path": "extension.js",
+          "hash": "096877ca65421c7befb0e0bbe2da2dc903856feb92e856b442b2366319124a60"
+        },
+        {
+          "path": "CLAUDE.md",
+          "hash": "6523effd8b9fc3710de8802522cf324c7fa92abb0390ccfd4f88059133b78153"
+        }
+      ],
+      "generated_at": "2026-03-24T23:49:44.771604Z"
+    },
+    {
+      "name": "architecture",
+      "file": "architecture.md",
+      "source_files": [
+        {
+          "path": "extension.js",
+          "hash": "096877ca65421c7befb0e0bbe2da2dc903856feb92e856b442b2366319124a60"
+        },
+        {
+          "path": "metadata.json",
+          "hash": "ec5efae9590216a9896bc12a956b3b57fedab07650452117d93a8614f251ccf9"
+        },
+        {
+          "path": "stylesheet.css",
+          "hash": "5d1d842659e7b7e3112c47a3b1c7c756dfe734bee95aaa2394eb72894ac909e8"
+        },
+        {
+          "path": "icons/warp-connected-symbolic.svg",
+          "hash": "3b1f9a6164d6e97a62ef0a40f2de13404734f8de3c5d7a349050aa15caa3d2bd"
+        },
+        {
+          "path": "icons/warp-disconnected-symbolic.svg",
+          "hash": "9dd3b65a3263dab6ba77dbcf340f6eabfd68c4d40e36e1fd8b27bb25cde985b8"
+        }
+      ],
+      "generated_at": "2026-03-24T23:49:44.771713Z"
+    },
+    {
+      "name": "getting-started",
+      "file": "getting-started.md",
+      "source_files": [
+        {
+          "path": "metadata.json",
+          "hash": "ec5efae9590216a9896bc12a956b3b57fedab07650452117d93a8614f251ccf9"
+        },
+        {
+          "path": "extension.js",
+          "hash": "096877ca65421c7befb0e0bbe2da2dc903856feb92e856b442b2366319124a60"
+        }
+      ],
+      "generated_at": "2026-03-24T23:49:44.771752Z"
+    },
+    {
+      "name": "configuration",
+      "file": "configuration.md",
+      "source_files": [
+        {
+          "path": "metadata.json",
+          "hash": "ec5efae9590216a9896bc12a956b3b57fedab07650452117d93a8614f251ccf9"
+        },
+        {
+          "path": "stylesheet.css",
+          "hash": "5d1d842659e7b7e3112c47a3b1c7c756dfe734bee95aaa2394eb72894ac909e8"
+        },
+        {
+          "path": "extension.js",
+          "hash": "096877ca65421c7befb0e0bbe2da2dc903856feb92e856b442b2366319124a60"
+        }
+      ],
+      "generated_at": "2026-03-24T23:49:44.771802Z"
+    },
+    {
+      "name": "api-reference",
+      "file": "api-reference.md",
+      "source_files": [
+        {
+          "path": "extension.js",
+          "hash": "096877ca65421c7befb0e0bbe2da2dc903856feb92e856b442b2366319124a60"
+        }
+      ],
+      "generated_at": "2026-03-24T23:49:44.771824Z"
+    },
+    {
+      "name": "deployment",
+      "file": "deployment.md",
+      "source_files": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "hash": "395e34f370225bcf5ad9683cac4ff15c4971bb8d99f3827fa2c029d3659f30f1"
+        },
+        {
+          "path": "metadata.json",
+          "hash": "ec5efae9590216a9896bc12a956b3b57fedab07650452117d93a8614f251ccf9"
+        }
+      ],
+      "generated_at": "2026-03-24T23:49:44.771855Z"
+    },
+    {
+      "name": "development",
+      "file": "development.md",
+      "source_files": [
+        {
+          "path": "extension.js",
+          "hash": "096877ca65421c7befb0e0bbe2da2dc903856feb92e856b442b2366319124a60"
+        },
+        {
+          "path": "CLAUDE.md",
+          "hash": "6523effd8b9fc3710de8802522cf324c7fa92abb0390ccfd4f88059133b78153"
+        },
+        {
+          "path": ".gitignore",
+          "hash": "334a18f9bf0d50ac2e45de5bfa6649064c5884844422e8e14af1edd2815db3b4"
+        }
+      ],
+      "generated_at": "2026-03-24T23:49:44.771909Z"
+    },
+    {
+      "name": "troubleshooting",
+      "file": "troubleshooting.md",
+      "source_files": [
+        {
+          "path": "extension.js",
+          "hash": "096877ca65421c7befb0e0bbe2da2dc903856feb92e856b442b2366319124a60"
+        }
+      ],
+      "generated_at": "2026-03-24T23:49:44.771934Z"
+    },
+    {
+      "name": "llm-context",
+      "file": "llm-context.md",
+      "source_files": [
+        {
+          "path": "extension.js",
+          "hash": "096877ca65421c7befb0e0bbe2da2dc903856feb92e856b442b2366319124a60"
+        },
+        {
+          "path": "metadata.json",
+          "hash": "ec5efae9590216a9896bc12a956b3b57fedab07650452117d93a8614f251ccf9"
+        },
+        {
+          "path": "stylesheet.css",
+          "hash": "5d1d842659e7b7e3112c47a3b1c7c756dfe734bee95aaa2394eb72894ac909e8"
+        },
+        {
+          "path": ".github/workflows/ci.yml",
+          "hash": "395e34f370225bcf5ad9683cac4ff15c4971bb8d99f3827fa2c029d3659f30f1"
+        }
+      ],
+      "generated_at": "2026-03-24T23:49:44.771995Z"
+    }
+  ]
+}
