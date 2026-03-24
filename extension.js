@@ -43,6 +43,9 @@ class WarpIndicator extends PanelMenu.Button {
         // Build right-click action menu
         this._buildActionMenu();
 
+        // Ensure WARP is disconnected on startup
+        this._runCommandAsync(['warp-cli', 'disconnect'], null);
+
         // Initial status fetch and start polling
         this._refreshStatus();
         this._startPolling();
@@ -94,11 +97,34 @@ class WarpIndicator extends PanelMenu.Button {
         this._toggleItem = new PopupMenu.PopupMenuItem('Connect');
         this._toggleItem.connect('activate', () => {
             if (this._state === WarpState.CONNECTED)
-                this._runWarpCommand(['warp-cli', 'disconnect']);
+                this._disconnectWarp();
             else
-                this._runWarpCommand(['warp-cli', 'connect']);
+                this._connectWarp();
         });
         this.menu.addMenuItem(this._toggleItem);
+    }
+
+    _connectWarp() {
+        // Enable and start the systemd service, then connect the tunnel
+        this._runCommandAsync(['pkexec', 'systemctl', 'enable', '--now', 'warp-svc.service'], () => {
+            // Wait for the service to be ready before issuing connect
+            GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {
+                this._runWarpCommand(['warp-cli', 'connect']);
+                return GLib.SOURCE_REMOVE;
+            });
+        });
+    }
+
+    _disconnectWarp() {
+        // Disconnect the tunnel first, then stop and disable the service
+        this._runCommandAsync(['warp-cli', 'disconnect'], () => {
+            GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+                this._runCommandAsync(['pkexec', 'systemctl', 'disable', '--now', 'warp-svc.service'], () => {
+                    this._refreshStatus();
+                });
+                return GLib.SOURCE_REMOVE;
+            });
+        });
     }
 
     _startPolling() {
@@ -128,12 +154,12 @@ class WarpIndicator extends PanelMenu.Button {
             this._updateIndicator();
         });
 
-        this._runWarpCli(['warp-cli', 'account'], (output) => {
+        this._runWarpCli(['warp-cli', 'registration', 'show'], (output) => {
             this._parseAccount(output);
             this._updateIndicator();
         });
 
-        this._runWarpCli(['warp-cli', 'warp-stats'], (output) => {
+        this._runWarpCli(['warp-cli', 'tunnel', 'stats'], (output) => {
             this._parseStats(output);
             this._updateIndicator();
         });
@@ -157,6 +183,27 @@ class WarpIndicator extends PanelMenu.Button {
             });
         } catch (_e) {
             // warp-cli not installed
+        }
+    }
+
+    _runCommandAsync(argv, callback) {
+        try {
+            const proc = Gio.Subprocess.new(
+                argv,
+                Gio.SubprocessFlags.NONE
+            );
+
+            proc.wait_check_async(null, (source, result) => {
+                try {
+                    source.wait_check_finish(result);
+                    if (callback)
+                        callback();
+                } catch (_e) {
+                    // command failed — do not call callback
+                }
+            });
+        } catch (_e) {
+            // command not found
         }
     }
 
@@ -185,7 +232,8 @@ class WarpIndicator extends PanelMenu.Button {
         }
         this._statusData = data;
 
-        const status = (data['status'] || '').toLowerCase();
+        // warp-cli status outputs "Status update: Connected" — key is "status update"
+        const status = (data['status update'] || data['status'] || '').toLowerCase();
         if (status.includes('connected') && !status.includes('disconnected'))
             this._state = WarpState.CONNECTED;
         else if (status.includes('connecting'))
@@ -254,16 +302,17 @@ class WarpIndicator extends PanelMenu.Button {
         const a = this._accountData;
         const st = this._statsData;
 
-        this._updateInfoRow(this._statusRow, 'Status', s['status'] || 'Unknown');
+        this._updateInfoRow(this._statusRow, 'Status',
+            s['status update'] || s['status'] || 'Unknown');
         this._updateInfoRow(this._modeRow, 'Mode', s['mode'] || s['warp'] || '—');
         this._updateInfoRow(this._networkRow, 'Network',
             a['organization'] || a['team'] || s['network'] || '—');
         this._updateInfoRow(this._accountRow, 'Account',
             a['account type'] || a['account'] || '—');
         this._updateInfoRow(this._endpointRow, 'Endpoint',
-            st['endpoint'] || s['endpoint'] || '—');
+            st['endpoints'] || st['endpoint'] || s['endpoint'] || '—');
         this._updateInfoRow(this._protocolRow, 'Protocol',
-            st['protocol'] || s['protocol'] || '—');
+            st['tunnel protocol'] || st['protocol'] || s['protocol'] || '—');
     }
 
     destroy() {
