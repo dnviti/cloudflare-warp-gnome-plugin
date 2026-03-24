@@ -1,0 +1,8 @@
+{
+  "uuid": "cloudflare-warp-indicator@dnviti",
+  "name": "Cloudflare WARP Indicator",
+  "description": "System tray indicator and controls for Cloudflare WARP VPN. Shows connection status, info panel, and connect/disconnect toggle via warp-cli.",
+  "shell-version": ["45", "46", "47", "48"],
+  "version": 1,
+  "url": "https://github.com/dnviti/cloudflare-warp-gnome-plugin"
+}

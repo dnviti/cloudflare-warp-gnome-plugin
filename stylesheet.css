@@ -1,0 +1,36 @@
+/* Cloudflare WARP Indicator Styles */
+
+.warp-indicator {
+    /* No extra spacing needed — inherits panel button defaults */
+}
+
+.warp-icon-connected {
+    color: #26a269;
+}
+
+.warp-icon-disconnected {
+    color: #c01c28;
+}
+
+.warp-icon-connecting {
+    color: #e5a50a;
+}
+
+.warp-info-heading {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+.warp-info-label {
+    font-weight: bold;
+    min-width: 120px;
+}
+
+.warp-info-value {
+    color: #deddda;
+}
+
+.warp-separator {
+    margin: 4px 0;
+}
